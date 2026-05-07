@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>HelpBot</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body>
+  <main class="chat">
+    <section class="chat__layout" aria-label="HelpBot чат">
+      <header class="chat__header">
+        <div class="chat__brand">
+          <p class="chat__eyebrow">Внутренняя техподдержка</p>
+          <h1 class="chat__title">HelpBot</h1>
+        </div>
+        <span class="chat__status" id="status">Готов</span>
+      </header>
+
+      <div class="chat__messages" id="messages" aria-live="polite">
+        <article class="chat__message chat__message--assistant">
+          <div class="chat__bubble chat__bubble--assistant">
+            Здравствуйте. Чем могу помочь?
+          </div>
+        </article>
+      </div>
+
+      <form class="chat__composer" id="chat-form">
+        <label class="sr-only" for="message-input">Сообщение</label>
+        <div class="chat__input-shell">
+          <textarea class="chat__input" id="message-input" name="message" rows="1" maxlength="2000"
+            placeholder="Напишите сообщение HelpBot" required></textarea>
+          <button class="chat__send" type="submit" id="send-button" aria-label="Отправить">↑</button>
+        </div>
+      </form>
+    </section>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+
+</html>
