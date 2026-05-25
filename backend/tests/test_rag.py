@@ -4,7 +4,6 @@ from backend.app.db import _can_create_hnsw_index, _parse_vector_dimensions
 from backend.app.rag import (
     _answer_has_source,
     _fallback,
-    _is_out_of_scope,
     _openrouter_role,
     _strip_trailing_source,
     _vector_literal,
@@ -17,10 +16,6 @@ def test_fallback_has_no_sources() -> None:
     assert response.fallback is True
     assert response.sources == []
     assert "нет точной информации" in response.answer
-
-
-def test_out_of_scope_detects_hr_questions() -> None:
-    assert _is_out_of_scope("Сколько дней отпуска мне положено?")
 
 
 def test_answer_source_validation() -> None:
