@@ -23,17 +23,6 @@ FALLBACK_ANSWER = (
     "Попробуйте сформулировать вопрос иначе или обратитесь в IT: incident@company.ru."
 )
 
-OUT_OF_SCOPE_HINTS = (
-    "зарплат",
-    "отпуск",
-    "больничн",
-    "бухгалтер",
-    "юридичес",
-    "медицин",
-    "льгот",
-    "кадров",
-    "hr",
-)
 SOURCE_BLOCK_RE = re.compile(r"\s*(?:Источник:\s*)?\[Документ:[^\]]+\][.!?]?\s*$")
 
 
@@ -88,8 +77,6 @@ class RagService:
 
     async def answer(self, message: str) -> ChatResponse:
         clean_message = message.strip()
-        if _is_out_of_scope(clean_message):
-            return _fallback()
 
         try:
             question_embedding = (await self.openrouter.embed([clean_message]))[0]
@@ -238,11 +225,6 @@ def _is_source_line(line: str) -> bool:
 
 def _fallback() -> ChatResponse:
     return ChatResponse(answer=FALLBACK_ANSWER, sources=[], fallback=True)
-
-
-def _is_out_of_scope(message: str) -> bool:
-    lowered = message.lower()
-    return any(hint in lowered for hint in OUT_OF_SCOPE_HINTS)
 
 
 def _vector_literal(values: list[float]) -> str:

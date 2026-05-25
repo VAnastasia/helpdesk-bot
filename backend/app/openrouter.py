@@ -40,7 +40,6 @@ class OpenRouterClient:
             "messages": messages,
             "temperature": 0.1,
             "max_tokens": 500,
-            "stop": ["\n\nUser:", "###"],
         }
         data = await self._post("/chat/completions", payload)
         choices = data.get("choices") or []
